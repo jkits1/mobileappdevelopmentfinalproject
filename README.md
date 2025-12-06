@@ -1,6 +1,6 @@
 # mobileappdevelopmentfinalproject
 
-A new Flutter project.
+A new Flutter project. (PLEASE RUN AS WINDOWS)
 
 ## FOR INSTRUCTOR
 
@@ -15,3 +15,4 @@ Stateless and Stateful widget
 Application state management (both the)
 Routing and navigation
 Local Storage
+
