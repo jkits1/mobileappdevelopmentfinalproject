@@ -1,2 +1,3 @@
 const String welcome = '/welcome';
-const String PokemonListScreen = '/pokemon_list';
+const String pokemonListScreen = '/pokemon_list';
+const String addPokemon = '/pokemon_add';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappdevelopmentfinalproject/screens/pokemon_add_screen.dart';
 import 'dart:io';
 import 'package:mobileappdevelopmentfinalproject/screens/pokemon_list_screen.dart';
 import 'package:mobileappdevelopmentfinalproject/screens/welcome_screen.dart';
@@ -7,6 +8,7 @@ import 'package:mobileappdevelopmentfinalproject/managers/preferences_manager.da
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  final prefs = PreferencesManager.instance;
   runApp(const MyApp());
 }
 
@@ -31,9 +33,11 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _loadPreferences() async {
     final isFirstRun = await _prefsManager.isFirstRun();
+    final storedDarkMode = await _prefsManager.getDarkMode();
 
     setState(() {
       _isFirstRun = isFirstRun;
+      _darkMode = storedDarkMode;
       _isLoading = false;
     });
   }
@@ -61,7 +65,7 @@ class _MyAppState extends State<MyApp> {
     }
 
     return MaterialApp(
-      title: 'Movie Tracker',
+      title: 'Pokemon Manager',
       theme: _darkMode ? ThemeData.dark() : ThemeData.light(),
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -69,6 +73,16 @@ class _MyAppState extends State<MyApp> {
             return MaterialPageRoute(
               builder: (_) => WelcomeScreen(onComplete: _completeFirstRun),
             );
+          case routes.pokemonListScreen:
+            return MaterialPageRoute(builder: (_) => PokemonListScreen(
+                    darkMode: _darkMode,
+                    onThemeChanged: _setDarkMode,
+                  ),
+          );
+
+          case routes.addPokemon:
+            return MaterialPageRoute(builder: (_) => PokemonFormScreen( ),
+          );
 
           default:
             return MaterialPageRoute(

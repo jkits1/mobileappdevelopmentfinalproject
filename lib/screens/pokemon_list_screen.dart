@@ -40,6 +40,13 @@ class _PokemonListScreenState extends State<PokemonListScreen>
       _isLoading = false;
     });
   }
+
+  Future<void> _addPokemon() async {
+  final result = await Navigator.pushNamed(context, routes.addPokemon);
+  if (result == true) {
+    await _loadData(); // reload the movie list
+  }
+}
   @override
   Widget build(BuildContext context)
   {
@@ -59,6 +66,17 @@ class _PokemonListScreenState extends State<PokemonListScreen>
           ),
         ],
       ),
+      body:_isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : _pokemon.isEmpty
+        ? const Center(
+          child:Text('No Pokemon yet. Add your first Pokemon!')
+        ) : const Center(child: Text("Pokemon:")),
+        floatingActionButton: FloatingActionButton(
+        onPressed: _addPokemon,
+        child: const Icon(Icons.add),
+        ),
+          
     );
   }
 }

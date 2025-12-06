@@ -1,9 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesManager {
-  const PreferencesManager._();
 
-  static const PreferencesManager instance = PreferencesManager._();
+  static final PreferencesManager instance = PreferencesManager._internal();
+  PreferencesManager._internal();
 
   static const String userNameKey = 'userName';
   static const String darkModeKey = 'darkMode';
