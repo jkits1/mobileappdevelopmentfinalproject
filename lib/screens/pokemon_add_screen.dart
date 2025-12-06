@@ -32,7 +32,7 @@ class _PokemonFormScreenState extends State<PokemonFormScreen> {
     if (widget.pokemon != null) {
       final p = widget.pokemon!;
       _nameController.text = p.name;
-      _idController.text = p.id.toString();
+      _idController.text = p.pokemonId.toString();
       _heightController.text = p.height.toString();
       _weightController.text = p.weight.toString();
       _baseExpController.text = p.baseExperience.toString();

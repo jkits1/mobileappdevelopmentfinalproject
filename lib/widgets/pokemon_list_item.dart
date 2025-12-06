@@ -14,26 +14,37 @@ class PokemonListItem extends StatelessWidget {
   });
 
   //just used to get an icon
-  Future<String?> fetchIconUrl(int speciesId) async {
-    final url = Uri.parse('https://pokeapi.co/api/v2/pokemon/$speciesId');
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        // The icon is usually in sprites.front_default
-        return data['sprites']['front_default'] as String?;
+ Future<String?> fetchAnimatedIconUrl(int speciesId) async {
+  final url = Uri.parse('https://pokeapi.co/api/v2/pokemon/$speciesId');
+  try {
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+
+      // Try to get the animated front sprite
+      final animated = data['sprites']?['other']?['showdown']?['front_default'];
+
+      if (animated != null) {
+      return animated as String;
       }
-    } catch (e) {
-      print('Error fetching icon: $e');
+
+      // fallback to official artwork
+      final official = data['sprites']?['other']?['official-artwork']?['front_default'];
+      if (official != null) {
+      return official as String;
+      }
     }
-    return null;
+  } catch (e) {
+    print('Error fetching icon: $e');
   }
+  return null;
+}
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: FutureBuilder<String?>(
-        future: fetchIconUrl(pokemon.pokemonId), // or speciesId if you store that
+        future: fetchAnimatedIconUrl(pokemon.pokemonId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const SizedBox(
