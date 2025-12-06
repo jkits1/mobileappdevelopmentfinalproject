@@ -2,15 +2,16 @@
 
 A new Flutter project.
 
-## Getting Started
+## FOR INSTRUCTOR
 
-This project is a starting point for a Flutter application.
+Hi! This is Jeffrey. Sorry, I didn't have the time to finish my project so I left some stuff out. I do not want to be marked in:
+Application Testing
+Gesture Handling
+The Second Competencies
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Things I would like to be marked on:
+Dart language best practices
+Stateless and Stateful widget
+Application state management (both the)
+Routing and navigation
+Local Storage
