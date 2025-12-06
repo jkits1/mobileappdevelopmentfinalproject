@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappdevelopmentfinalproject/models/pokemon.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
 import 'package:mobileappdevelopmentfinalproject/screens/pokemon_add_screen.dart';
 import 'dart:io';
 import 'package:mobileappdevelopmentfinalproject/screens/pokemon_list_screen.dart';
@@ -8,6 +11,9 @@ import 'package:mobileappdevelopmentfinalproject/managers/preferences_manager.da
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  //have to do this because my mobile app is broken and i want to run it on desktop instead
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
   final prefs = PreferencesManager.instance;
   runApp(const MyApp());
 }
@@ -81,7 +87,13 @@ class _MyAppState extends State<MyApp> {
           );
 
           case routes.addPokemon:
-            return MaterialPageRoute(builder: (_) => PokemonFormScreen( ),
+            return MaterialPageRoute(builder: (_) => PokemonFormScreen(),
+          );
+
+          case routes.editPokemon:
+            final pokemon = settings.arguments as Pokemon;
+            return MaterialPageRoute(
+            builder: (_) => PokemonFormScreen(pokemon: pokemon), 
           );
 
           default:
